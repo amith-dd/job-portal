@@ -28,7 +28,7 @@ public class MyDao {
 	}
 
 	public static Recruiter recruiterLogin(String orgName, String password) {
-		Query query = em.createQuery("select re from Recruiter re where re.orgName=?");
+		Query query = em.createQuery("select re from Recruiter re where re.orgName=?1");
 		query.setParameter(1, orgName);
 		Recruiter dbRecruiter = (Recruiter) query.getSingleResult();
 		if (dbRecruiter != null && dbRecruiter.getPassword().equals(password)) {
