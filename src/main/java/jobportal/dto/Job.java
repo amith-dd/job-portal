@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 @Entity
 public class Job {
@@ -18,6 +19,8 @@ public class Job {
 	private String experience;
 	private String location;
 	private String skill;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Recruiter recruiter;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Application> applications;
 	public int getId() {
@@ -62,18 +65,26 @@ public class Job {
 	public void setApplications(List<Application> applications) {
 		this.applications = applications;
 	}
+	
 	public Job(String designation, double salary, String experience, String location, String skill,
-			List<Application> applications) {
+			Recruiter recruiter, List<Application> applications) {
 		super();
 		this.designation = designation;
 		this.salary = salary;
 		this.experience = experience;
 		this.location = location;
 		this.skill = skill;
+		this.recruiter = recruiter;
 		this.applications = applications;
 	}
 	public Job() {
 		super();
+	}
+	public Recruiter getRecruiter() {
+		return recruiter;
+	}
+	public void setRecruiter(Recruiter recruiter) {
+		this.recruiter = recruiter;
 	}
 	
 	

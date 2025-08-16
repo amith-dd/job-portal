@@ -54,6 +54,19 @@ public class MyDao {
 		List<Job> jobs = em.find(Recruiter.class, recruiterId).getJobs();
 		return jobs;
 	}
+	
+	public static void deleteJob(int recruiterid ,int jobid) {
+		Recruiter recruiter = em.find(Recruiter.class, recruiterid);
+		Job job = em.find(Job.class, jobid);
+		if(recruiter.getJobs().contains(job)) {
+			recruiter.getJobs().remove(job);
+			et.begin();
+			em.merge(recruiter);
+			em.remove(job);
+			et.commit();
+		}
+		
+	}
 
 	public static Job findJobByJobId(int jobid) {
 		return em.find(Job.class, jobid);
@@ -72,7 +85,7 @@ public class MyDao {
 	}
 
 	public static Applicant applicantLogin(String email, String password) {
-		Query query = em.createQuery("select ap from Applicant ap where ap.email=?");
+		Query query = em.createQuery("select ap from Applicant ap where ap.email=?1");
 		query.setParameter(1, email);
 		Applicant applicant = (Applicant) query.getSingleResult();
 		if (applicant != null && applicant.getPassword().equals(password)) {
@@ -104,6 +117,12 @@ public class MyDao {
 	
 	public static List<Application> viewApplicationsByJobId(int jobId){
 		return em.find(Job.class, jobId).getApplications();
+	}
+	
+	public static List<Job> getalljobs(){
+		Query query = em.createQuery("select j from Job j");
+		List<Job> jobs = query.getResultList();
+		return jobs;
 	}
 
 }

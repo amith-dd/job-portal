@@ -14,5 +14,10 @@ Organization Password:<input type="text" name="orgpassword"><br>
 <input type="submit">
 </form>
 
+<% String message = (String)  request.getAttribute("message"); %>
+<% if(message!=null){ %>
+<h5><%= message %></h5>
+<% } %>
+
 </body>
 </html>

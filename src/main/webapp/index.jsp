@@ -8,6 +8,16 @@
 </head>
 <body>
 <a href="recruitersignup.jsp">Recruiter Signup</a><br>
-<a href="recruitersignin.jsp">Recruiter Signin</a>
+<a href="recruitersignin.jsp">Recruiter Signin</a><br>
+
+
+
+
+<a href="applicantsignup.jsp">Applicant Signup</a><br>
+<a href="applicantsignin.jsp">Applicant Signin</a>
+
+
+
+
 </body>
 </html>
