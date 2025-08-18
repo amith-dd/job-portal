@@ -10,7 +10,7 @@ public class Application {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private int userid;
+	private int applicantid;
 	private String status;
 	private String date;
 	private String designation;
@@ -70,7 +70,7 @@ public class Application {
 	public Application(int userid, String status, String date, String designation, double salary, String experience,
 			String location, String skill) {
 		super();
-		this.userid = userid;
+		this.applicantid = userid;
 		this.status = status;
 		this.date = date;
 		this.designation = designation;
@@ -83,10 +83,10 @@ public class Application {
 		super();
 	}
 	public int getUserid() {
-		return userid;
+		return applicantid;
 	}
 	public void setUserid(int userid) {
-		this.userid = userid;
+		this.applicantid = userid;
 	}
 	
 	

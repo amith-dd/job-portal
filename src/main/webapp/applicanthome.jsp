@@ -10,7 +10,16 @@
 </head>
 <body>
 
-	<% List<Job> jobs =(List) request.getAttribute("jobs"); %>
+<a href="myapplications">MY APPLICATIONS</a>
+
+<% String message = (String) request.getAttribute("message"); %>
+<% if(message!=null){ %>
+
+<h2><%= message %></h2>
+
+<% } %>
+
+<% List<Job> jobs =(List) request.getAttribute("jobs"); %>
 
 <table border="2px">
 <tr>
@@ -37,7 +46,7 @@
 <td><%= job.getExperience() %></td>
 <td><%= job.getLocation() %></td>
 <td><%= job.getSkill() %></td>
-<td><a href="apply">APPLY</a> </td>
+<td><a href="applyjob?jobid=<%= job.getId() %>">APPLY</a> </td>
 
 </tr>
 

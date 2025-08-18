@@ -23,7 +23,7 @@ public class ApplicantSignup extends HttpServlet{
 		String password = req.getParameter("password");
 		String skills = req.getParameter("skill");
 		
-		Applicant applicant = new Applicant(name, city, contact, email, password, skills, null);
+		Applicant applicant = new Applicant(name, city, contact, email, password, skills);
 		MyDao.Applicantsignup(applicant);
 		
 		resp.sendRedirect("applicantsignin.jsp");

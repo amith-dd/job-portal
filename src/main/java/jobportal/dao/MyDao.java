@@ -94,25 +94,37 @@ public class MyDao {
 		return null;
 	}
 
-	public static void applicantJobApply(int applicantid, int jobid) {
-		Applicant ap = em.find(Applicant.class, applicantid);
+	public static boolean applicantJobApply(int applicantid, int jobid) {
 		Job job = em.find(Job.class, jobid);
-		LocalDate date = LocalDate.now();
-		String stringdate = String.valueOf(date);
-		Application application = new Application(applicantid, "pending", stringdate, job.getDesignation(),
-				job.getSalary(), job.getExperience(), job.getLocation(), job.getSkill());
+		
+		List<Application> applications = job.getApplications();
+		boolean applied = true;
+		for(Application application : applications) {
+			if(application.getUserid()==applicantid) {
+				applied=false;
+			}
+		}
+		if(applied) {
+			LocalDate date = LocalDate.now();
+			String stringdate = String.valueOf(date);
+			Application application = new Application(applicantid, "pending", stringdate, job.getDesignation(),
+					job.getSalary(), job.getExperience(), job.getLocation(), job.getSkill());
 
-		ap.getApplications().add(application);
-		job.getApplications().add(application);
+			job.getApplications().add(application);
 
-		et.begin();
-		em.merge(ap);
-		em.merge(job);
-		et.commit();
+			et.begin();
+			em.merge(job);
+			et.commit();
+		}
+		return applied;
+		
 	}
 	
 	public static List<Application> viewApplicationsByApplicantId(int applicantid){
-		return em.find(Applicant.class, applicantid).getApplications();
+		Query query = em.createQuery("select app from Application app where app.applicantid=?1");
+		query.setParameter(1, applicantid);
+		List<Application> appls = query.getResultList();
+		return appls;
 	}
 	
 	public static List<Application> viewApplicationsByJobId(int jobId){

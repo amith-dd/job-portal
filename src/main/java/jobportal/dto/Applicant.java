@@ -1,13 +1,9 @@
 package jobportal.dto;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Applicant {
@@ -20,8 +16,7 @@ public class Applicant {
 	private String email;
 	private String password;
 	private String primarySkill;
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Application> applications;
+	
 
 	public int getId() {
 		return id;
@@ -71,16 +66,8 @@ public class Applicant {
 		this.primarySkill = primarySkill;
 	}
 
-	public List<Application> getApplications() {
-		return applications;
-	}
 
-	public void setApplications(List<Application> applications) {
-		this.applications = applications;
-	}
-
-	public Applicant(String name, String city, long contact, String email, String password, String primarySkill,
-			List<Application> applications) {
+	public Applicant(String name, String city, long contact, String email, String password, String primarySkill) {
 		super();
 		this.name = name;
 		this.city = city;
@@ -88,7 +75,6 @@ public class Applicant {
 		this.email = email;
 		this.password = password;
 		this.primarySkill = primarySkill;
-		this.applications = applications;
 	}
 
 	public String getPassword() {
